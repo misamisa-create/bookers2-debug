@@ -20,8 +20,11 @@
           </td>
           <td><%= link_to @show_book.title, book_path(@show_book) %></td>
           <td><%= @show_book.body %></td>
-          <td><%= link_to 'Edit', edit_book_path(@show_book), class: "btn btn-sm btn-success edit_book_#{@show_book.id}" %></td>
-          <td><%= link_to 'Destroy', book_path(@show_book), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger destroy_book_#{@show_book.id}"%></td>
+          <!--current userの指定-->
+          <% if @show_book.user == current_user %>
+            <td><%= link_to 'Edit', edit_book_path(@show_book), class: "btn btn-sm btn-success edit_book_#{@show_book.id}" %></td>
+            <td><%= link_to 'Destroy', book_path(@show_book), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger destroy_book_#{@show_book.id}"%></td>
+          <% end %>
         </tr>
       </table>
     </div>

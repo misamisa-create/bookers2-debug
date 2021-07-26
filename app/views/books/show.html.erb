@@ -50,32 +50,43 @@
             </tr>
           </table>
         </div>
+        <!---->
+        <!--直す-->
+        <!---->
         <!--コメント-->
         <div class="row">
           <div class="col-12">
             <!--bootstrapの記載に直す-->
-            <div　class="comments">
+            <tr>
               <% @show_book.book_comments.each do |book_comment| %>
-                <%= book_comment.user.name %>
+                <%= attachment_image_tag(book_comment.user, :profile_image, :fill, 50, 50, fallback: "no-image-icon.jpg") %>
                 <%= book_comment.comment %>
                 <!--削除-->
                 <% if book_comment.user == current_user %>
-                <div class="comment-delete">
                   <%= link_to "Destroy",book_book_comment_path(book_comment.book,book_comment),method: :delete %>
-                </div>
                 <% end %>
               <% end %>
-            </div>
-            <div class="new-comment">
-              <%= form_with(model:[@show_book,@book_comment],local:true) do |f| %>
-                <%= f.text_area :comment,rows:'5',placeholder:"コメントをここに"%>
-                <%= f.submit "送信" %>
-              <% end %>
-            </div>
+            </tr>
 
+            <td>
+
+
+              <!--新規投稿欄-->
+              <div class="new-comment">
+                <%= form_with(model:[@show_book,@book_comment],local:true) do |f| %>
+                  <%= f.text_area :comment,rows:'5',placeholder:"コメントをここに"%>
+                  <%= f.submit "送信" %>
+                <% end %>
+              </div>
+
+
+            </td>
 
           </div>
         </div>
+
+
+
 
 
 

@@ -50,7 +50,7 @@
             </tr>
           </table>
         </div>
-        <!--コメント新規投稿-->
+        <!--コメント-->
         <div class="row">
           <div class="col-12">
             <!--bootstrapの記載に直す-->
@@ -58,6 +58,12 @@
               <% @show_book.book_comments.each do |book_comment| %>
                 <%= book_comment.user.name %>
                 <%= book_comment.comment %>
+                <!--削除-->
+                <% if book_comment.user == current_user %>
+                <div class="comment-delete">
+                  <%= link_to "Destroy",book_book_comment_path(book_comment.book,book_comment),method: :delete %>
+                </div>
+                <% end %>
               <% end %>
             </div>
             <div class="new-comment">

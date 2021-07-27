@@ -9,8 +9,7 @@
     <!--メイン-->
     <div class='col-md-8 offset-md-1'>
       <!--本詳細-->
-      <div class="row">
-        <div class="col-12">
+
           <h2>Book detail</h2>
           <table class='table'>
             <tr>
@@ -43,66 +42,33 @@
                     </p>
                   <% end %>
                 </td>
-                <td>
-                  コメント数：<%= @show_book.book_comments.count %>
-                </td>
+                <td>コメント数：<%= @show_book.book_comments.count %></td>
               <% end %>
             </tr>
           </table>
-        </div>
-        <!---->
-        <!--直す-->
-        <!---->
+
         <!--コメント-->
-
-          <div class="col-12">
-            <table>
-            <!--bootstrapの記載に直す-->
-            <% @show_book.book_comments.each do |book_comment| %>
-              <tr>
-                <td><%= attachment_image_tag(book_comment.user, :profile_image, :fill, 50, 50, fallback: "no-image-icon.jpg") %></td>
-                <td><%= book_comment.comment %></td>
-                <!--削除-->
-                <td>
-                  <% if book_comment.user == current_user %>
-                    <%= link_to "Destroy",book_book_comment_path(book_comment.book,book_comment),method: :delete %>
-                  <% end %>
-                </td>
-              </tr>
-            <% end %>
-              <!--新規投稿欄-->
-              <tr>
-                <th>
-                <div class="new-comment">
-                  <%= form_with(model:[@show_book,@book_comment],local:true) do |f| %>
-
-                    <%= f.text_area :comment, class: 'form-control book_body' %>
-                    <%= f.submit "送信" %>
-                  <% end %>
-                </div>
-
-                </th>
-              </tr>
-            </table>
-
-
-
-
-
+          <table>
+          <!--bootstrapの記載に直す-->
+          <% @show_book.book_comments.each do |book_comment| %>
+            <tr>
+              <td><%= attachment_image_tag(book_comment.user, :profile_image, :fill, 50, 50, fallback: "no-image-icon.jpg") %></td>
+              <td><%= book_comment.comment %></td>
+              <!--削除-->
+              <% if book_comment.user == current_user %>
+              <td><%= link_to "Destroy",book_book_comment_path(book_comment.book,book_comment),class: 'btn-sm btn-danger',method: :delete %></td>
+              <% end %>
             </tr>
+          <% end %>
+          </table>
+            <!--新規投稿欄-->
+          <%= form_with(model:[@show_book,@book_comment],local:true) do |f| %>
+            <%= f.text_area :comment, size:"90x5" %><br>
+            <%= f.submit "送信" %>
+          <% end %>
 
-          </div>
 
-
-
-
-
-
-
-      </div>
     </div>
-
-
   </div>
 </div>
 

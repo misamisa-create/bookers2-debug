@@ -9,6 +9,24 @@ class User < ApplicationRecord
   has_many :book_comments,dependent: :destroy
   attachment :profile_image, destroy: false
 
+  has_many :relationships,class_name:'Relationship',foreign_key:'follower_id'
+  has_many :followings,through: :relationships,source: :followed
+  has_many :reverse_of_relationships,class_name:'Relationship',foreign_key:'followed_id'
+  has_many :followers,through: :reverse_of_relationships,source: :follower
+
+  def follow(other_user)
+    unless self == other_user
+      self.relationships.find_or_create_by(followed_id:other_user.id)
+    end
+  end
+  def unfollow(other_user)
+    relationship=self.relationships.find_by(followed_id:other_user.id)
+    relationship.destroy if relationship
+  end
+  def following?(other_user)
+    self.followings.include?(other_user)
+  end
+
   validates :name, length: { in: 2..20 }, uniqueness: true
   validates :introduction, length: {maximum: 50}
 end

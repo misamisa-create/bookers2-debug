@@ -10,6 +10,17 @@
 	  <th>introduction</th>
 	  <th><%= user.introduction %></th>
   </tr>
+  <tr>
+    <th>follows</th>
+    <th><%= link_to "#{user.followings.count}",followings_path %></th>
+  </tr>
+  <tr>
+    <th>followers</th>
+    <th><%= link_to "#{user.followers.count}",followers_path %></th>
+  </tr>
+  <tr>
+    <th><%= render 'relationships/follow_button',user:user %></th>
+  </tr>
 </table>
 
 

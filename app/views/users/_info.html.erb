@@ -12,11 +12,11 @@
   </tr>
   <tr>
     <th>follows</th>
-    <th><%= link_to "#{user.followings.count}",followings_path %></th>
+    <th><%= link_to "#{user.followings.count}",followings_path(user) %></th>
   </tr>
   <tr>
     <th>followers</th>
-    <th><%= link_to "#{user.followers.count}",followers_path %></th>
+    <th><%= link_to "#{user.followers.count}",followers_path(user) %></th>
   </tr>
   <tr>
     <th><%= render 'relationships/follow_button',user:user %></th>
@@ -25,6 +25,5 @@
 
 
 <div class='row'>
-  <!--ここの記載を直す-->
     <%= link_to '',edit_user_path(user.id),class: "btn btn-outline-secondary btn-block fas fa-user-cog edit_user_#{user.id}" %>
 </div>

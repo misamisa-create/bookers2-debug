@@ -22,9 +22,9 @@
           <!--直す-->
           <% unless current_user == user %>
             <% if current_user.following?(user) %>
-              <%= link_to "フォロー外す",relationship_path(user.id), method: :delete %>
+              <%= link_to "フォロー外す",relationship_path(current_user), method: :delete %>
             <% else %>
-              <%= link_to "フォローする",relationships_path, method: :get %>
+              <%= link_to "フォローする",relationships_path, method: :post %>
             <% end %>
           <% end %>
 

@@ -49,14 +49,14 @@
 
         <!--コメント-->
           <table>
-          <!--bootstrapの記載に直す-->
           <% @show_book.book_comments.each do |book_comment| %>
             <tr>
               <td><%= attachment_image_tag(book_comment.user, :profile_image, :fill, 50, 50, fallback: "no-image-icon.jpg") %></td>
               <td><%= book_comment.comment %></td>
-              <!--削除-->
+              <!--削除機能-->
               <% if book_comment.user == current_user %>
-              <td><%= link_to "Destroy",book_book_comment_path(book_comment.book,book_comment),class: 'btn-sm btn-danger',method: :delete %></td>
+              <!--質問する-->
+              <td><%= link_to "Destroy",book_book_comment_path(@show_book,book_comment),class: 'btn-sm btn-danger',method: :delete %></td>
               <% end %>
             </tr>
           <% end %>

@@ -7,6 +7,7 @@
   <% else %>
     <%= form_for(current_user.relationships.build) do |f| %>
       <%= hidden_field_tag :followed_id,user.id %>
+
       <%= f.submit 'フォローする',class:'btn btn-primary btn-black' %>
     <% end %>
   <% end %>

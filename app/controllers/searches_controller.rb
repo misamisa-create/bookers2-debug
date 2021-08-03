@@ -13,13 +13,29 @@ class SearchesController < ApplicationController
   private
   def search_for(model,content,method)
     if model == "user"
-      if method == "perfect"
+      # 前方
+      if method == "forward_match"
+        User.where('name LIKE ?', content+'%')
+      # 後方
+      elsif method == "backward_match"
+        User.where('name LIKE ?','%'+content )
+      # 完全
+      elsif method == "perfect"
         User.where(name: content)
+      # 部分
       else
         User.where('name LIKE ?','%'+content+'%')
       end
+
     elsif model == "book"
-      if method == "perfect"
+      # 前方
+      if method == "forward_match"
+        Book.where('title LIKE ?', content+'%')
+      # 後方
+      elsif method == "backward_match"
+        Book.where('title LIKE ?','%'+content )
+
+      elsif  method == "perfect"
         Book.where(title: content)
       else
         Book.where('title LIKE ?','%'+content+'%')

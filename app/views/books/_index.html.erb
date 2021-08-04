@@ -19,22 +19,11 @@
         <td><%= book.body %></td>
         <!--コントローラに記述してからいいね機能を記述-->
         <td>
-          <!--もし投稿画像のいいねに自分が含まれる場合-->
-          <% if book.favorited_by?(current_user) %>
-              <p>
-                <!--❤を️deleteすることができる-->
-                <%= link_to book_favorites_path(book.id), method: :delete do %>
-                  ♥<%= book.favorites.count %> いいね
-                <% end %>
-              </p>
-          <% else %>
-              <p>
-                <!--❤️にcreateすることができる-->
-                <%= link_to book_favorites_path(book.id), method: :post do %>
-                  ♡<%= book.favorites.count %> いいね
-                <% end %>
-              </p>
-          <% end %>
+          <!--非同期通信-->
+          <div id="favorites_buttons_<%= book.id %>">
+            <%= render 'favorites/favorite',book:book %>
+          </div>
+
         </td>
         <td>
           <!--コメント数-->

@@ -1,5 +1,16 @@
 class BooksController < ApplicationController
 
+  def show
+    @show_book = Book.find(params[:id])
+    @book = Book.new
+    @users = User.all
+
+    @book_comment = BookComment.new
+    # order(created_at)で作成順にコメントをとる
+    # 下の記述を見直して書く
+    @book_comments=@show_book.book_comments.order(created_at: :desc)
+  end
+
   def index
     @books = Book.all
     @book = Book.new
@@ -14,13 +25,6 @@ class BooksController < ApplicationController
       @books = Book.all
       render 'index'
     end
-  end
-
-  def show
-    @show_book = Book.find(params[:id])
-    @book = Book.new
-    @users = User.all
-    @book_comment = BookComment.new
   end
 
   def edit

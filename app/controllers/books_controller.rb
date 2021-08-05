@@ -12,8 +12,12 @@ class BooksController < ApplicationController
   end
 
   def index
-    @books = Book.all
+    # 投稿一覧ページを週間ランキングにする
+    # sortメソッドでfavoritesを多い順に並べる(書き方はサイトを参照！)
+    # Bookに紐づくfavoritesを取得する(favoritesメソッド)
+    @week_ranks = Book.includes(:favorites).sort{|a,b|b.favorites.size<=>a.favorites.size }
     @book = Book.new
+    @books = Book.all
   end
 
   def create

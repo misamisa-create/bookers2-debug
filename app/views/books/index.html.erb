@@ -12,7 +12,10 @@
       <%= render 'searches/form' %>
 
       <h2>Books</h2>
-      <%= render 'index', books: @books %>
+      <!--ランキングで表示-->
+      <%= render 'index', books: @week_ranks %>
+
+
     </div>
   </div>
 </div>

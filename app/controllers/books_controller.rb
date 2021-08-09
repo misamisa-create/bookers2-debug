@@ -1,14 +1,19 @@
 class BooksController < ApplicationController
+  impressionist :actions=> [:show]
+
 
   def show
     @show_book = Book.find(params[:id])
+    impressionist(@show_book, nil, unique: [:session_hash.to_s])
     @book = Book.new
     @users = User.all
 
     @book_comment = BookComment.new
     # order(created_at)で作成順にコメントをとる
     # 下の記述を見直して書く
-    @book_comments=@show_book.book_comments.order(created_at: :desc)
+    @book_comments = @show_book.book_comments.order(created_at: :desc)
+
+
   end
 
   def index
@@ -18,6 +23,7 @@ class BooksController < ApplicationController
     @week_ranks = Book.includes(:favorites).sort{|a,b|b.favorites.size<=>a.favorites.size }
     @book = Book.new
     @books = Book.all
+
   end
 
   def create

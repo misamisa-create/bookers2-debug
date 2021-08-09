@@ -23,6 +23,7 @@
               <% if @show_book.user == current_user %>
                 <td><%= link_to 'Edit', edit_book_path(@show_book), class: "btn btn-sm btn-success edit_book_#{@show_book.id}" %></td>
                 <td><%= link_to 'Destroy', book_path(@show_book), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger destroy_book_#{@show_book.id}"%></td>
+              <% end %>
                 <!--いいね機能-->
                 <td>
                   <div id="favorites_buttons_<%= @show_book.id %>">
@@ -30,7 +31,8 @@
                   </div>
                 </td>
                 <td>コメント数：<%= @show_book.book_comments.count %></td>
-              <% end %>
+                <td>閲覧数：<%= @show_book.impressionist_count %></td>
+
             </tr>
           </table>
           <!--非同期-->

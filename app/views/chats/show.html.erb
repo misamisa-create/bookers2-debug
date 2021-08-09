@@ -1,0 +1,12 @@
+<h2><strong><%= @user.name %>さんとのチャット</strong></h2>
+<!--チャット一覧-->
+<% @chats.each do |chat| %>
+  <tr>
+    <td><%= chat.message %></td><br />
+  </tr>
+<% end %>
+<!--チャット投稿欄-->
+<%= form_with model:@chat do |f| %>
+  <%= f.text_field :message %>
+  <%= f.hidden_field :room_id %>
+<% end %>

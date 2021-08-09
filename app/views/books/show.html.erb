@@ -25,22 +25,9 @@
                 <td><%= link_to 'Destroy', book_path(@show_book), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger destroy_book_#{@show_book.id}"%></td>
                 <!--いいね機能-->
                 <td>
-                  <!--もし投稿画像のいいねに自分が含まれる場合-->
-                  <% if @show_book.favorited_by?(current_user) %>
-                    <p>
-                      <!--❤を️deleteすることができる-->
-                      <%= link_to book_favorites_path(@show_book.id), method: :delete do %>
-                        ♥<%= @show_book.favorites.count %> いいね
-                      <% end %>
-                    </p>
-                  <% else %>
-                    <p>
-                      <!--❤️にcreateすることができる-->
-                      <%= link_to book_favorites_path(@show_book.id), method: :post do %>
-                        ♡<%= @show_book.favorites.count %> いいね
-                      <% end %>
-                    </p>
-                  <% end %>
+                  <div id="favorites_buttons_<%= @show_book.id %>">
+                    <%= render 'favorites/favorite',book:@show_book %>
+                  </div>
                 </td>
                 <td>コメント数：<%= @show_book.book_comments.count %></td>
               <% end %>

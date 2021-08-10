@@ -80,6 +80,7 @@
         </thread>
       </table>
 
+
       <!--●折線グラフ-->
       <table class='table table-hover table-inverse'>
         <thread>
@@ -90,67 +91,72 @@
               <!--chart.js読み込み※他に方法がありそう-->
               <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
               <script>
-              // myLineChartを取得し変数ctxに代入
-              var ctx = document.getElementById("myLineChart");
-
-              // ⭐️描画するグラフをnew Chart()によって設定する
-              var myLineChart = new Chart(ctx, {
-                // ⓪折線グラフに設定
-                type: 'line',
-                //
-                // ①グラフに描画するデータ
-                data: {
-                  labels: ['6日前', '5日前', '4日前', '3日前', '2日前', '1日前', '今日'],
-                  datasets: [
-                    {
-                      label: '投稿した本の数',
-                      data: [
-                        <%= @six_days_ago.count %>,
-                        <%= @five_days_ago.count %>,
-                        <%= @four_days_ago.count %>,
-                        <%= @three_days_ago.count %>,
-                        <%= @two_days_ago.count %>,
-                        <%= @yesterday_book.count %>,
-                        <%= @today_book.count %>
-                        ],
-                      borderColor: "rgba(0,0,255,1)",
-                      backgroundColor: "rgba(0,0,0,0)"
-                    }
-                  ],
-                },
-                //
-                // ②グラフのオプション
-                options: {
-                  title: {
-                    // タイトル表示の可否
-                    display: true,
-                    text: '7日間の投稿数の比較'
-                  },
-                  scales: {
-                    // y軸の設定
-                    yAxes: [{
-                      // 軸の設定
-                      ticks: {
-                        suggestedMax: 10,
-                        suggestedMin: 0,
-                        stepSize: 1,
-                         callback: function(value, index, values){
-                           return  value
+                // ここだけturbolinksを無効化する
+                $(document).on('turbolinks:load', function() {
+                  // myLineChartを取得し変数ctxに代入
+                  var ctx = document.getElementById("myLineChart");
+                  // ⭐️描画するグラフをnew Chart()によって設定する
+                  var myLineChart = new Chart(ctx, {
+                    // ⓪折線グラフに設定
+                    type: 'line',
+                    //
+                    // ①グラフに描画するデータ
+                    data: {
+                      labels: ['6日前', '5日前', '4日前', '3日前', '2日前', '1日前', '今日'],
+                      datasets: [
+                        {
+                          label: '投稿した本の数',
+                          data: [
+                            <%= @six_days_ago.count %>,
+                            <%= @five_days_ago.count %>,
+                            <%= @four_days_ago.count %>,
+                            <%= @three_days_ago.count %>,
+                            <%= @two_days_ago.count %>,
+                            <%= @yesterday_book.count %>,
+                            <%= @today_book.count %>
+                            ],
+                          borderColor: "rgba(0,0,255,1)",
+                          backgroundColor: "rgba(0,0,0,0)"
                         }
-                      }
-                    }]
-                  },
-                }
-              });
-              // ↑⭐️描画するグラフをnew Chart()によって設定する
+                      ],
+                    },
+                    //
+                    // ②グラフのオプション
+                    options: {
+                      title: {
+                        // タイトル表示の可否
+                        display: true,
+                        text: '7日間の投稿数の比較'
+                      },
+                      scales: {
+                        // y軸の設定
+                        yAxes: [{
+                          // 軸の設定
+                          ticks: {
+                            suggestedMax: 10,
+                            suggestedMin: 0,
+                            stepSize: 1,
+                             callback: function(value, index, values){
+                               return  value
+                            }
+                          }
+                        }]
+                      },
+                    }
+                  });
+                // ↑⭐️描画するグラフをnew Chart()によって設定する
+                });
               </script>
+
             </td>
           </tr>
         </thread>
       </table>
+
     </div>
 
 
 
   </div>
 </div>
+

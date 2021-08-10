@@ -24,6 +24,7 @@ class BooksController < ApplicationController
     @book = Book.new
     @books = Book.all
 
+
   end
 
   def create

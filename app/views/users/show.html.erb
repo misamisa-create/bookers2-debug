@@ -13,8 +13,7 @@
       <h2>Books</h2>
       <%= render 'books/index',books: @books %>
 
-
-      <!--投稿数-->
+      <!--●投稿数-->
       <table class='table table-hover table-inverse'>
         <thread>
           <tr>
@@ -56,7 +55,7 @@
         </thread>
       </table>
 
-      <!--7日分の投稿数-->
+      <!--●7日分の投稿数-->
       <h3>7日分の投稿数</h3>
       <table class='table table-hover table-inverse'>
         <thread>
@@ -81,20 +80,24 @@
         </thread>
       </table>
 
-      <!--コピペ-->
+      <!--●折線グラフ-->
       <table class='table table-hover table-inverse'>
         <thread>
           <tr>
             <td>
-              <!--折線グラフ-->
-              <canvas id="myLineChart"></canvas>
+              <!--キャンバスエリアを設定-->
+              <canvas id="myLineChart" width="200" height="150" ></canvas>
+              <!--chart.js読み込み※他に方法がありそう-->
               <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
               <script>
+              // myLineChartを取得し変数ctxに代入
               var ctx = document.getElementById("myLineChart");
+
+              // ⭐️描画するグラフをnew Chart()によって設定する
               var myLineChart = new Chart(ctx, {
                 // ⓪折線グラフに設定
                 type: 'line',
-                // 
+                //
                 // ①グラフに描画するデータ
                 data: {
                   labels: ['6日前', '5日前', '4日前', '3日前', '2日前', '1日前', '今日'],
@@ -115,27 +118,31 @@
                     }
                   ],
                 },
-                // 
+                //
                 // ②グラフのオプション
                 options: {
                   title: {
+                    // タイトル表示の可否
                     display: true,
                     text: '7日間の投稿数の比較'
                   },
                   scales: {
+                    // y軸の設定
                     yAxes: [{
+                      // 軸の設定
                       ticks: {
                         suggestedMax: 10,
                         suggestedMin: 0,
                         stepSize: 1,
-                        callback: function(value, index, values){
-                          return  value
+                         callback: function(value, index, values){
+                           return  value
                         }
                       }
                     }]
                   },
                 }
               });
+              // ↑⭐️描画するグラフをnew Chart()によって設定する
               </script>
             </td>
           </tr>
